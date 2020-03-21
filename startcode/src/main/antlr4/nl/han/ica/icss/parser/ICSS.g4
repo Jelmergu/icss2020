@@ -40,4 +40,47 @@ ASSIGNMENT_OPERATOR: ':=';
 
 //--- PARSER: ---
 
-stylesheet: EOF;
+/**
+ * Level 0
+ * Contains parserRules for at the very least css
+ */
+stylesheet: (variableAssignment | stylerule)* EOF;
+
+//stylerule: selector OPEN_BRACE declaration* CLOSE_BRACE; // override in Level 3
+selector: (classSelector | tagSelector | idSelector);
+//declaration: LOWER_IDENT COLON literal SEMICOLON; // override in Level 1
+
+literal: bool | pixel | percent | scalar | color;
+
+bool: TRUE | FALSE;
+pixel: PIXELSIZE;
+percent: PERCENTAGE;
+scalar: SCALAR;
+color: COLOR;
+
+tagSelector: LOWER_IDENT;
+classSelector: CLASS_IDENT;
+idSelector: ID_IDENT;
+
+/**
+ * level 1
+ * Includes level 0 and expands with variables
+ */
+//declaration: LOWER_IDENT COLON (literal | variableReference) SEMICOLON; // override in Level 2
+variableAssignment: variableReference ASSIGNMENT_OPERATOR literal SEMICOLON;
+variableReference: CAPITAL_IDENT;
+
+/**
+ * level 2
+ * Includes level 1 and expands with operations
+ */
+declaration: LOWER_IDENT COLON (literal | variableReference | operation) SEMICOLON;
+operation: (variableReference | literal) ((PLUS | MIN | MUL) (variableReference |literal | operation));
+
+/**
+ * Level 3
+ * Includes level 2 and expands with if statements
+ */
+ifClause: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (ifClause | declaration)+ CLOSE_BRACE;
+condition: bool | variableReference;
+stylerule: selector OPEN_BRACE (ifClause | declaration)* CLOSE_BRACE;

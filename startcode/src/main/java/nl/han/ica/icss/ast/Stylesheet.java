@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public class Stylesheet extends ASTNode {
 
-
 	public ArrayList<ASTNode> body;
 	
 	public Stylesheet() {

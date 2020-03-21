@@ -3,6 +3,7 @@ package nl.han.ica.icss.ast;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/** A block of style declarations */
 public class Stylerule extends ASTNode {
 	
 	public ArrayList<Selector> selectors = new ArrayList<>();
