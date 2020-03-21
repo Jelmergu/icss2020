@@ -244,19 +244,19 @@ public class Fixtures {
 			}
 	    */
         stylesheet.addChild((new Stylerule())
-                .addChild(new TagSelector("p"))
-                .addChild((new Declaration("background-color"))
-                        .addChild(new ColorLiteral("#ffffff")))
-                .addChild((new Declaration("width"))
-                        .addChild(new VariableReference("ParWidth")))
-                .addChild((new IfClause())
-                        .addChild(new VariableReference("AdjustColor"))
-                        .addChild((new Declaration("color")
-                                .addChild(new ColorLiteral("#124532"))))
-                        .addChild((new IfClause())
-                                .addChild(new VariableReference("UseLinkColor"))
-                                .addChild(new Declaration("background-color").addChild(new VariableReference("LinkColor")))
-                        ))
+				.addChild(new TagSelector("p"))
+					.addChild((new Declaration("background-color"))
+							.addChild(new ColorLiteral("#ffffff")))
+					.addChild((new Declaration("width"))
+							.addChild(new VariableReference("ParWidth")))
+					.addChild((new IfClause())
+						.addChild(new VariableReference("AdjustColor"))
+						.addChild((new Declaration("color")
+								.addChild(new ColorLiteral("#124532"))))
+							.addChild((new IfClause())
+									.addChild(new VariableReference("UseLinkColor"))
+									.addChild(new Declaration("background-color").addChild(new VariableReference("LinkColor")))
+					))
         );
         /*
         a {
