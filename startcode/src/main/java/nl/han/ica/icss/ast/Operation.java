@@ -1,5 +1,7 @@
 package nl.han.ica.icss.ast;
 
+import nl.han.ica.icss.ast.types.ExpressionType;
+
 import java.util.ArrayList;
 
 public abstract class Operation extends Expression {
@@ -26,4 +28,5 @@ public abstract class Operation extends Expression {
         }
         return this;
     }
+
 }

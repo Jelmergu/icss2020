@@ -1,5 +1,7 @@
 package nl.han.ica.icss.ast;
 
+import nl.han.ica.icss.ast.types.ExpressionType;
+
 import java.util.Objects;
 
 public class VariableReference extends Expression {
@@ -30,4 +32,5 @@ public class VariableReference extends Expression {
 
 		return Objects.hash(name);
 	}
+
 }
