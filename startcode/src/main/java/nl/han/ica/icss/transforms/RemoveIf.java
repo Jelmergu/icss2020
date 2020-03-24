@@ -10,24 +10,16 @@ public class RemoveIf implements Transform {
     @Override
     public void apply(AST ast) {
         resolveNode(ast.root);
-        return;
     }
 
     private void resolveNode(ASTNode node) {
         node.getChildren().stream().forEach(child -> {
             if (child instanceof IfClause) {
                 node.removeChild(child);
-                if (resolveIf((IfClause) child)) {
-                    ((IfClause) child).body.forEach(node::addChild);
-                    boolean a = true;
-                }
-                else {
-                    boolean a = true;
-                }
+                if (resolveIf((IfClause) child)) ((IfClause) child).body.forEach(node::addChild);
             }
             else resolveNode(child);
         });
-        return;
     }
 
     private boolean resolveIf(IfClause child) {
