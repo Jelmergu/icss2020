@@ -38,11 +38,9 @@ public class EvalExpressions implements Transform {
         for (ASTNode child : node.getChildren()) {
             if (child instanceof VariableAssignment) {
                 resolveAssignment((VariableAssignment) child);
-                continue;
             }
             if (child instanceof Stylerule) {
                 resolveStyleRule((Stylerule) child);
-                continue;
             }
         }
     }

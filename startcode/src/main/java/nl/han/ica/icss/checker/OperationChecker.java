@@ -33,6 +33,10 @@ public class OperationChecker implements CheckerInterface {
         }
     }
 
+    /**
+     * Get the expression type that results in performing the operation
+     * @return
+     */
     public static ExpressionType getExpressionType (Operation node) {
         Stack<ExpressionType> types = new Stack<>();
         for (ASTNode child : node.getChildren()) {

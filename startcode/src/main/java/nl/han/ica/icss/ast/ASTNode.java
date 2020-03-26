@@ -83,4 +83,8 @@ public class ASTNode {
         }
         return true;
     }
+
+    public void addChildren(ArrayList<ASTNode> children) {
+        children.forEach(this::addChild);
+    }
 }

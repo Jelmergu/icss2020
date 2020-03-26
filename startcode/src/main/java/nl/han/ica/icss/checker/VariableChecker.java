@@ -21,7 +21,6 @@ public class VariableChecker implements CheckerInterface {
      */
     public void check(VariableAssignment var) {
         VariableChecker.variables.put(var.name, var.expression);
-        return;
     }
 
     /**
@@ -30,7 +29,6 @@ public class VariableChecker implements CheckerInterface {
 
     public void check(VariableReference node) {
         if (!VariableChecker.variables.containsKey(node)) node.setError("Variable " + node.name + " is not defined");
-        return;
     }
 
 

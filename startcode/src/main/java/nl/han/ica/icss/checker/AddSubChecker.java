@@ -22,9 +22,15 @@ public class AddSubChecker extends OperationChecker {
 
 
     public void check(Operation node) {
-        if (super.getExpressionType(node) == ExpressionType.UNDEFINED) return;
+        getExpressionType(node);
     }
 
+    /**
+     * Get the expression type that results in performing the operation
+     * @param types
+     * @param node
+     * @return
+     */
     public static ExpressionType getExpressionType(Stack<ExpressionType> types, ASTNode node) {
         ExpressionType type = null;
 

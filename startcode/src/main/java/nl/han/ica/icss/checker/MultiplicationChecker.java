@@ -25,6 +25,10 @@ public class MultiplicationChecker extends OperationChecker {
         if (Checker.getExpressionType(node) == ExpressionType.UNDEFINED) return;
     }
 
+    /**
+     * Get the expression type that results in performing the operation
+     * @return
+     */
     public static ExpressionType getExpressionType(Stack<ExpressionType> types, ASTNode node) {
         ExpressionType type = null;
 
@@ -42,7 +46,6 @@ public class MultiplicationChecker extends OperationChecker {
             node.setError("Expected " + type + " or " + ExpressionType.SCALAR + ", got " +expressionType);
             return ExpressionType.UNDEFINED;
         }
-
         return type;
     }
 }

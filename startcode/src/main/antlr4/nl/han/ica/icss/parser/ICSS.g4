@@ -44,7 +44,7 @@ ASSIGNMENT_OPERATOR: ':=';
  * Level 0
  * Contains parserRules for at the very least css
  */
-stylesheet: (variableAssignment | stylerule)* EOF;
+//stylesheet: (variableAssignment | stylerule)* EOF; // override in Level 4
 
 //stylerule: selector OPEN_BRACE declaration* CLOSE_BRACE; // override in Level 3
 selector: (classSelector | tagSelector | idSelector);
@@ -81,6 +81,21 @@ operation: (variableReference | literal) ((PLUS | MIN | MUL) (variableReference 
  * Level 3
  * Includes level 2 and expands with if statements
  */
-ifClause: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (ifClause | declaration)+ CLOSE_BRACE;
+//ifClause: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (ifClause | declaration)+ CLOSE_BRACE; // override in Level 4
 condition: bool | variableReference;
-stylerule: selector OPEN_BRACE (ifClause | declaration)* CLOSE_BRACE;
+//stylerule: selector OPEN_BRACE (ifClause | declaration)* CLOSE_BRACE; // override in Level 4
+
+/**
+ * 'Level 4'
+ * Includes level 3 and expands with mixins(own expansion)
+ * Mixins start with an @ followed by lowercase identifier followed by one or more declarations between curly brackets
+ * A mixin can be used at the same places a declaration can be used. A mixin gets used by its identifier preceded by a @
+ * Example:
+ * @example { width: 10px; }
+ * p { @example; }
+ */
+mixinAssignment: mixinReference OPEN_BRACE declaration+ CLOSE_BRACE;
+mixinReference: '@' + LOWER_IDENT;
+stylerule: selector OPEN_BRACE (ifClause | declaration | mixinReference SEMICOLON)* CLOSE_BRACE;
+ifClause: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (ifClause | declaration)+ CLOSE_BRACE;
+stylesheet: (variableAssignment | stylerule | mixinAssignment)* EOF;

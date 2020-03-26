@@ -135,4 +135,24 @@ public class ASTListener extends ICSSBaseListener {
     public void exitOperation(ICSSParser.OperationContext ctx) {
         currentContainer.pop();
     }
+
+    @Override
+    public void enterMixinAssignment(ICSSParser.MixinAssignmentContext ctx) {
+        addChild(new MixinAssignment());
+    }
+
+    @Override
+    public void exitMixinAssignment(ICSSParser.MixinAssignmentContext ctx) {
+        currentContainer.pop();
+    }
+
+    @Override
+    public void enterMixinReference(ICSSParser.MixinReferenceContext ctx) {
+        addChild(new MixinReference(ctx.getText()));
+    }
+
+    @Override
+    public void exitMixinReference(ICSSParser.MixinReferenceContext ctx) {
+        currentContainer.pop();
+    }
 }

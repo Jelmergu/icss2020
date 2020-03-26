@@ -41,8 +41,8 @@ public class Checker {
         if (node instanceof Operation) (new OperationChecker()).check(node);
         if (node instanceof Declaration) (new DeclarationChecker()).check(node);
         if (node instanceof IfClause) (new IfChecker()).check(node);
+        if (node instanceof MixinReference || node instanceof MixinAssignment) (new MixinChecker()).check(node);
 
-        return;
     }
 
     public static ExpressionType getExpressionType(Expression expression) {
